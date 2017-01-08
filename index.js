@@ -1,5 +1,6 @@
 /* eslint-env node */
 'use strict';
+var path = require('path');
 var BasePlugin = require('ember-cli-deploy-plugin');
 var fbTools = require('firebase-tools');
 
@@ -12,9 +13,18 @@ module.exports = {
 
       upload: function(context) {
         var outer = this;
+        var publicSource;
+
+        try {
+          var firebaseConfig = require(this.project.root + path.sep + 'firebase.json');
+          publicSource = firebaseConfig.hosting.public;
+        } catch (ex) {
+          console.warn(ex);
+        }
+
         var options = {
           project: context.config.fireBaseAppName,
-          public: context.config.build.outputPath,
+          public: publicSource || context.config.build.outputPath,
           message: (context.revisionData || {}).revisionKey
         };
         return fbTools.deploy(options).then(function() {
