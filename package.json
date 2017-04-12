@@ -22,7 +22,8 @@
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-deploy-plugin": "^0.2.2",
-    "firebase-tools": "^3.0.6"
+    "firebase-tools": "^3.0.6",
+    "firebase": ">=3.4.1 <4.0.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
